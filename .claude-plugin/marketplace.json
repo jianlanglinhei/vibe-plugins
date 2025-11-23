@@ -1,0 +1,31 @@
+{
+  "name": "Vibe Plugins Marketplace",
+  "description": "A collection of custom Claude Code plugins",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "cross-platform",
+      "displayName": "一码多端插件",
+      "description": "帮助开发者实现跨平台代码开发和部署的工具集",
+      "path": ".claude-plugin/cross-platform"
+    },
+    {
+      "name": "productivity",
+      "displayName": "效率插件",
+      "description": "提升开发效率的工具集合，包括代码生成、重构、文档生成等",
+      "path": ".claude-plugin/productivity"
+    },
+    {
+      "name": "stability",
+      "displayName": "稳定性插件",
+      "description": "提升代码稳定性和可靠性的工具集，包括错误处理、性能监控、测试等",
+      "path": ".claude-plugin/stability"
+    },
+    {
+      "name": "no-code",
+      "displayName": "无码类插件",
+      "description": "低代码/无代码开发工具，通过可视化和自然语言生成代码",
+      "path": ".claude-plugin/no-code"
+    }
+  ]
+}

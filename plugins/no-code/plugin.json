@@ -1,0 +1,45 @@
+{
+  "name": "no-code",
+  "displayName": "无码类插件",
+  "description": "低代码/无代码开发工具，通过可视化和自然语言生成代码",
+  "version": "1.0.0",
+  "author": "Vibe Team",
+  "commands": [
+    {
+      "name": "visual-builder",
+      "description": "可视化页面构建器"
+    },
+    {
+      "name": "workflow-designer",
+      "description": "工作流设计器"
+    },
+    {
+      "name": "data-model",
+      "description": "数据模型生成器"
+    },
+    {
+      "name": "form-builder",
+      "description": "表单构建器"
+    },
+    {
+      "name": "api-generator",
+      "description": "API 自动生成"
+    },
+    {
+      "name": "describe-to-code",
+      "description": "自然语言转代码"
+    }
+  ],
+  "agents": [
+    {
+      "name": "ui-builder-agent",
+      "description": "UI 构建助手"
+    },
+    {
+      "name": "logic-builder-agent",
+      "description": "业务逻辑构建助手"
+    }
+  ],
+  "mcpServers": [],
+  "hooks": []
+}

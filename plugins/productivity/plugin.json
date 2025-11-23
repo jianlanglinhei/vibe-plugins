@@ -1,0 +1,37 @@
+{
+  "name": "productivity",
+  "displayName": "效率插件",
+  "description": "提升开发效率的工具集合，包括代码生成、重构、文档生成等",
+  "version": "1.0.0",
+  "author": "Vibe Team",
+  "commands": [
+    {
+      "name": "quick-scaffold",
+      "description": "快速生成项目脚手架"
+    },
+    {
+      "name": "generate-docs",
+      "description": "自动生成代码文档"
+    },
+    {
+      "name": "refactor-assist",
+      "description": "智能代码重构助手"
+    },
+    {
+      "name": "snippet-manager",
+      "description": "代码片段管理器"
+    },
+    {
+      "name": "batch-rename",
+      "description": "批量重命名工具"
+    }
+  ],
+  "agents": [
+    {
+      "name": "refactor-agent",
+      "description": "专门负责代码重构的智能助手"
+    }
+  ],
+  "mcpServers": [],
+  "hooks": []
+}
