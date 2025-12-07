@@ -1,0 +1,131 @@
+[
+  {
+    "name": "large-screen-adapter",
+    "displayName": "大屏适配助手",
+    "type": "prompt",
+    "category": "体验优化",
+    "author": "休默",
+    "team": "邦彦"
+  },
+  {
+    "name": "weex-to-miniprogram",
+    "displayName": "Weex to 小程序转换器",
+    "type": "skill",
+    "category": "一码多端",
+    "author": "纪伟",
+    "team": "邦彦"
+  },
+  {
+    "name": "data-prefetch",
+    "displayName": "数据预取配置器",
+    "type": "mcp",
+    "category": "体验优化",
+    "author": "可晨",
+    "team": "邦彦"
+  },
+  {
+    "name": "env-switcher",
+    "displayName": "交易环境切换器",
+    "type": "skill",
+    "category": "一码多端",
+    "author": "士见",
+    "team": "邦彦"
+  },
+  {
+    "name": "one-click-test",
+    "displayName": "一键提测工具",
+    "type": "mcp",
+    "category": "一码多端",
+    "author": "陈庚",
+    "team": "邦彦"
+  },
+  {
+    "name": "dep-risk-checker",
+    "displayName": "变更依赖风险检查器",
+    "type": "mcp",
+    "category": "一码多端",
+    "author": "尤咖",
+    "team": "邦彦"
+  },
+  {
+    "name": "branch-integration",
+    "displayName": "变更分支自动化集成工具",
+    "type": "slash-command",
+    "category": "一码多端",
+    "author": "甘枣",
+    "team": "邦彦"
+  },
+  {
+    "name": "bug-auto-fix",
+    "displayName": "bug 自动修复工具",
+    "type": "slash-command",
+    "category": "一码多端",
+    "author": "甘枣",
+    "team": "邦彦"
+  },
+  {
+    "name": "webpage-to-markdown",
+    "displayName": "一键提取网页 markdown",
+    "type": "agent",
+    "category": "一码多端",
+    "author": "甘枣",
+    "team": "邦彦"
+  },
+  {
+    "name": "changeset-generator",
+    "displayName": "变更单生成工具",
+    "type": "mcp",
+    "category": "一码多端",
+    "author": "尤咖",
+    "team": "邦彦"
+  },
+  {
+    "name": "ai-commit",
+    "displayName": "AI 代码提交工具",
+    "type": "slash-command",
+    "category": "一码多端",
+    "author": "甘枣",
+    "team": "邦彦"
+  },
+  {
+    "name": "ai-code-stats",
+    "displayName": "AI 代码统计工具",
+    "type": "hook",
+    "category": "一码多端",
+    "author": "甘枣",
+    "team": "邦彦"
+  },
+  {
+    "name": "orisa-transpiler",
+    "displayName": "Orisa 转码 Agent",
+    "type": "agent",
+    "category": "一码多端",
+    "author": "峻谦",
+    "team": "怒飞"
+  },
+  {
+    "name": "cross-platform-debug",
+    "displayName": "多端调试 Agent",
+    "type": "agent",
+    "category": "一码多端",
+    "author": "褒已",
+    "team": "怒飞"
+  },
+  {
+    "name": "search-component-generator",
+    "displayName": "搜推组件生产 Agent",
+    "type": "agent",
+    "category": "一码多端",
+    "author": "义羽/峻谦",
+    "team": "怒飞"
+  },
+  {
+    "name": "cross-platform-mock",
+    "displayName": "多端 mock 工具",
+    "type": "agent",
+    "category": "一码多端",
+    "author": "轻夜",
+    "team": "怒飞"
+  }
+]
+

@@ -45,3 +45,105 @@ See the `.claude-plugin/example-plugin/` directory for a template.
 
 - [Claude Code Plugins Documentation](https://claude.com/blog/claude-code-plugins)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
+
+## CLI 安装器
+
+使用仓库内置的 CLI 把插件/MCP 注入到项目，支持 Claude Code、Cursor、qoder 三端。
+
+### 快速开始
+
+```bash
+# 安装依赖
+npm install
+
+# 自动检测环境并安装 cross-platform 插件
+node ./packages/cli/bin/vibe-plugins.js install cross-platform
+
+# 指定环境与目标目录
+node ./packages/cli/bin/vibe-plugins.js install cross-platform --env claude --target /path/to/project
+```
+
+### 安装方式
+
+#### 方式一：传统文件复制（默认）
+
+直接复制文件到目标项目：
+
+```bash
+node ./packages/cli/bin/vibe-plugins.js install cross-platform --env claude
+```
+
+#### 方式二：使用 Claude Agent SDK（推荐）
+
+利用 [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/typescript) 的能力，让 Claude 自己执行安装：
+
+```bash
+node ./packages/cli/bin/vibe-plugins.js install cross-platform --env claude --use-sdk
+```
+
+这种方式会：
+- 使用 `@anthropic-ai/claude-agent-sdk` 的 `query()` 函数
+- 让 Claude 读取插件文件并执行安装
+- 利用 Claude Code 的默认工具集进行文件操作
+- 提供更智能的安装过程
+
+### 使用已安装的插件
+
+安装完成后，在你的代码中使用 Claude Agent SDK 加载插件：
+
+```javascript
+import { query } from "@anthropic-ai/claude-agent-sdk";
+
+for await (const message of query({
+  prompt: "使用跨端插件检查代码兼容性",
+  options: {
+    plugins: [
+      { type: "local", path: "./.claude-plugin/cross-platform" }
+    ],
+    tools: { type: "preset", preset: "claude_code" }
+  }
+})) {
+  // 处理消息...
+}
+```
+
+参考示例：
+- `packages/cli/examples/use-plugin-with-sdk.js` - 使用已安装的插件
+- `packages/cli/examples/install-and-use.js` - 安装并立即使用
+
+### CLI 选项
+
+- `--env <claude|cursor|qoder|auto>`：强制指定环境，默认自动探测
+- `--target <path>`：目标项目路径，默认当前目录
+- `--dry-run`：仅打印计划，不写入文件
+- `--use-sdk`：使用 Claude Agent SDK 执行安装（仅 Claude 环境）
+
+### 环境支持
+
+CLI 会根据环境更新：
+- **Claude Code**: `.claude-plugin/<plugin>/plugin.json` 与 MCP 目录
+- **Cursor**: `~/.cursor/settings.json`（仅 MCP）
+- **qoder**: `qoder.config.json` 与项目目录结构
+
+### 生成新能力
+
+根据表格数据自动生成插件结构：
+
+```bash
+# 单个生成
+node ./packages/cli/bin/vibe-plugins.js generate \
+  -n my-tool \
+  -d "我的工具" \
+  -t mcp \
+  -c 一码多端 \
+  -a 张三 \
+  --team 前端团队
+
+# 批量生成（从 JSON 文件）
+node ./packages/cli/bin/vibe-plugins.js generate-batch ./capabilities.json
+
+# 查看支持的类型
+node ./packages/cli/bin/vibe-plugins.js list-types
+```
+
+详细文档请参考：[packages/cli/README.md](packages/cli/README.md)
