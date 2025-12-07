@@ -1,21 +1,17 @@
 {
   "name": "vibe-plugins",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
+  "description": "AI IDE 配置管理工具 - 基于 rulesync 的预设分发",
   "bin": {
-    "vibe-plugins": "./packages/cli/bin/vibe-plugins.js"
+    "vibe-plugins": "./bin/vibe-plugins.js"
   },
   "scripts": {
-    "cli": "node ./packages/cli/bin/vibe-plugins.js",
-    "cli:install": "node ./packages/cli/bin/vibe-plugins.js install cross-platform"
+    "cli": "node ./bin/vibe-plugins.js"
   },
   "dependencies": {
-    "@anthropic-ai/claude-agent-sdk": "^0.1.60",
-    "@modelcontextprotocol/sdk": "^1.24.3",
-    "commander": "^12.1.0",
-    "fs-extra": "^11.3.2",
-    "kleur": "^4.1.5",
     "rulesync": "^3.29.0"
-  }
+  },
+  "keywords": ["ai", "ide", "cursor", "claude", "rulesync", "config"],
+  "license": "MIT"
 }

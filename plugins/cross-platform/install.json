@@ -1,7 +1,0 @@
-{
-  "mcp": ["o2-space", "sls", "browser"],
-  "skills": ["perf-scan"],
-  "commands": ["optimize-bundle"],
-  "agents": ["cross-platform-agent"]
-}
-
