@@ -4,14 +4,26 @@
   "type": "module",
   "description": "AI IDE 配置管理工具 - 基于 rulesync 的预设分发",
   "bin": {
-    "vibe-plugins": "./bin/vibe-plugins.js"
+    "vibe-plugins": "./bin/vibe-plugins.ts"
   },
   "scripts": {
-    "cli": "node ./bin/vibe-plugins.js"
+    "cli": "npx tsx ./bin/vibe-plugins.ts"
   },
   "dependencies": {
-    "rulesync": "^3.29.0"
+    "rulesync": "^3.29.0",
+    "tsx": "^4.21.0"
   },
-  "keywords": ["ai", "ide", "cursor", "claude", "rulesync", "config"],
+  "devDependencies": {
+    "@types/node": "^22.19.1",
+    "typescript": "^5.9.3"
+  },
+  "keywords": [
+    "ai",
+    "ide",
+    "cursor",
+    "claude",
+    "rulesync",
+    "config"
+  ],
   "license": "MIT"
 }
