@@ -8,7 +8,12 @@
   },
   "scripts": {
     "cli": "node ./packages/cli/bin/vibe-plugins.js",
-    "cli:install": "node ./packages/cli/bin/vibe-plugins.js install cross-platform"
+    "cli:install": "node ./packages/cli/bin/vibe-plugins.js install cross-platform",
+    "rulesync": "rulesync",
+    "rulesync:cursor": "rulesync generate --targets cursor --features '*'",
+    "rulesync:claude": "rulesync generate --targets claudecode --features '*'",
+    "rulesync:claude:modular": "rulesync generate --targets claudecode --features '*' --modular-mcp",
+    "rulesync:all": "rulesync generate --targets cursor,claudecode,windsurf,cline,roo --features '*'"
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.1.60",
@@ -16,5 +21,8 @@
     "commander": "^12.1.0",
     "fs-extra": "^11.3.2",
     "kleur": "^4.1.5"
+  },
+  "devDependencies": {
+    "rulesync": "^3.29.0"
   }
 }
