@@ -68,7 +68,15 @@ function install(preset: string, targetDir: string = process.cwd()): void {
   }
 
   console.log(`\n🎉 预设 "${preset}" 安装完成！`);
-  console.log(`\n下一步：运行 npx vibe-plugins generate 生成 IDE 配置`);
+  console.log(`
+📝 下一步：生成 IDE 配置
+
+  npx rulesync generate --targets cursor --features '*'      # 生成 Cursor 配置
+  npx rulesync generate --targets claudecode --features '*'  # 生成 Claude Code 配置
+  npx rulesync generate --targets '*' --features '*'         # 生成所有 IDE 配置
+
+支持的 IDE: cursor, claudecode, copilot, windsurf, cline, roo
+`);
 }
 
 function generate(target: string = "*"): void {
