@@ -1,21 +1,27 @@
 {
-  "name": "vibe-plugins",
+  "name": "jl-vibe-plugins",
   "version": "0.1.0",
   "type": "module",
   "description": "AI IDE 配置管理工具 - 基于 rulesync 的预设分发",
   "bin": {
-    "vibe-plugins": "./bin/vibe-plugins.ts"
+    "vibe-plugins": "./bin/vibe-plugins.js"
   },
   "scripts": {
-    "cli": "npx tsx ./bin/vibe-plugins.ts"
+    "build": "tsc",
+    "cli": "node ./bin/vibe-plugins.js",
+    "dev": "npx tsx ./src/vibe-plugins.ts"
   },
+  "files": [
+    "bin",
+    "presets"
+  ],
   "dependencies": {
-    "rulesync": "^3.29.0",
-    "tsx": "^4.21.0"
+    "rulesync": "^3.29.0"
   },
   "devDependencies": {
     "@types/node": "^22.19.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "tsx": "^4.21.0"
   },
   "keywords": [
     "ai",
