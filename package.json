@@ -15,7 +15,7 @@
     "@modelcontextprotocol/sdk": "^1.24.3",
     "commander": "^12.1.0",
     "fs-extra": "^11.3.2",
-    "kleur": "^4.1.5"
-  },
-  "devDependencies": {}
+    "kleur": "^4.1.5",
+    "rulesync": "^3.29.0"
+  }
 }
