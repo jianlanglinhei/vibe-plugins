@@ -53,6 +53,14 @@ function install(preset: string, targetDir: string = process.cwd()): void {
     }
   }
 
+  // 复制 .aiignore
+  const aiignoreSrc = path.join(presetDir, ".aiignore");
+  const aiignoreDest = path.join(rulesyncDir, ".aiignore");
+  if (fs.existsSync(aiignoreSrc)) {
+    fs.copyFileSync(aiignoreSrc, aiignoreDest);
+    console.log(`✅ 已复制 .aiignore`);
+  }
+
   // 合并 mcp.json
   const mcpSrc = path.join(presetDir, "mcp.json");
   const mcpDest = path.join(rulesyncDir, "mcp.json");
