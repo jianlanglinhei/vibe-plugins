@@ -107,6 +107,27 @@ function list(): void {
   }
 }
 
+function tag(entryFile: string): void {
+  const resolved = path.resolve(process.cwd(), entryFile);
+
+  if (!fs.existsSync(resolved)) {
+    console.error(`❌ 文件不存在: ${resolved}`);
+    process.exit(1);
+  }
+
+  console.log(`🏷️  分析工具: ${resolved}`);
+  console.log("");
+
+  // TODO: 基于 Claude Agent SDK 实现具体分析逻辑
+  console.log("📝 待实现: 读取入口文件，分析工具功能，生成标签");
+  console.log("");
+  console.log("预期输出:");
+  console.log("  - 工具名称");
+  console.log("  - 功能描述");
+  console.log("  - 类型标签 (cli/library/api...)");
+  console.log("  - 技术栈标签");
+}
+
 function showHelp(): void {
   console.log(`
 vp (vibe-presets) - AI IDE 配置管理工具
@@ -115,11 +136,13 @@ vp (vibe-presets) - AI IDE 配置管理工具
   vp install <preset> [target-dir]  安装套件到目标目录
   vp generate [target]              生成 IDE 配置 (cursor/claudecode/*)
   vp list                           列出可用套件
+  vp tag <entry-file>               分析工具入口文件，生成标签
 
 示例:
   vp install cross-platform         安装跨端开发配置
   vp generate cursor                生成 Cursor 配置
   vp generate                       生成所有 IDE 配置
+  vp tag ./src/index.ts             分析工具并生成标签
 `);
 }
 
@@ -142,6 +165,15 @@ switch (cmd) {
 
   case "list":
     list();
+    break;
+
+  case "tag":
+    if (!args[0]) {
+      console.error("用法: vp tag <entry-file>");
+      console.error("示例: vp tag ./src/index.ts");
+      process.exit(1);
+    }
+    tag(args[0]);
     break;
 
   default:
