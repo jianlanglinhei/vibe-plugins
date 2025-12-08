@@ -95,7 +95,7 @@ function list() {
 }
 function showHelp() {
   console.log(`
-vp (vibe-plugins) - AI IDE 配置管理工具
+vp (vibe-presets) - AI IDE 配置管理工具
 
 用法:
   vp install <preset> [target-dir]  安装套件到目标目录
@@ -113,7 +113,7 @@ const [, , cmd, ...args] = process.argv;
 switch (cmd) {
   case "install":
     if (!args[0]) {
-      console.error("用法: vibe-plugins install <preset> [target-dir]");
+      console.error("用法: vp install <preset> [target-dir]");
       list();
       process.exit(1);
     }

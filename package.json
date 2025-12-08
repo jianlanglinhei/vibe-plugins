@@ -1,5 +1,5 @@
 {
-  "name": "@ali/vibe-plugins",
+  "name": "@ali/vibe-presets",
   "version": "0.1.1",
   "type": "module",
   "description": "AI IDE 配置管理工具 - 基于 rulesync 的套件分发",
@@ -7,7 +7,7 @@
     "registry": "https://registry.anpm.alibaba-inc.com"
   },
   "bin": {
-    "vibe-plugins": "./bin/vibe-plugins.js",
+    "vibe-presets": "./bin/vibe-plugins.js",
     "vp": "./bin/vibe-plugins.js"
   },
   "scripts": {

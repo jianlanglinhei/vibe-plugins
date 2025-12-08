@@ -1,4 +1,4 @@
-# Vibe Plugins
+# Vibe Presets
 
 
 为 Cursor、Claude Code、Copilot、Windsurf 等 AI IDE 快速安装 Rules、Commands、MCP 等配置套件。
@@ -7,10 +7,10 @@
 
 ```bash
 # 使用 tnpm 安装
-tnpm install @ali/vibe-plugins@latest
+tnpm install @ali/vibe-presets@latest
 
 # 或全局安装
-tnpm install -g @ali/vibe-plugins@latest
+tnpm install -g @ali/vibe-presets@latest
 ```
 
 ## 快速开始
@@ -19,7 +19,7 @@ tnpm install -g @ali/vibe-plugins@latest
 
 ```bash
 # 全局安装
-tnpm install -g @ali/vibe-plugins@latest
+tnpm install -g @ali/vibe-presets@latest
 
 # 直接使用命令
 vp list                         # 查看所有可用套件
@@ -31,10 +31,10 @@ vp generate                     # 生成所有 IDE 配置
 ### 方式二：npx 临时运行（无需安装）
 
 ```bash
-npx @ali/vibe-plugins install cross-platform
-npx @ali/vibe-plugins generate cursor
+npx @ali/vibe-presets install cross-platform
+npx @ali/vibe-presets generate cursor
 # 或使用简写
-npx @ali/vibe-plugins list
+npx @ali/vibe-presets list
 ```
 
 ## 可用套件
@@ -151,7 +151,7 @@ vp generate cursor
     "setup:ai": "vp install cross-platform && vp generate cursor"
   },
   "devDependencies": {
-    "@ali/vibe-plugins": "^0.1.0"
+    "@ali/vibe-presets": "^0.1.0"
   }
 }
 ```
