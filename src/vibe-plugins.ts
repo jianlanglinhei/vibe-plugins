@@ -16,6 +16,7 @@ interface McpConfig {
 const PRESETS: Record<string, string> = {
   "cross-platform": "跨端开发配置（MCP、规则、命令）",
   "productivity": "效率工具配置",
+  "vibe-tools": "vibe-presets 工具链（打标、分析）",
 };
 
 function copyDir(src: string, dest: string): void {
