@@ -1,128 +1,171 @@
 # Vibe Plugins
 
-A marketplace for custom Claude Code plugins.
+> AI IDE 配置管理工具 - 基于 rulesync 的预设分发
 
-## Installation
+一键安装 AI 编程助手的规则、命令、MCP 配置，支持 Cursor、Claude Code、Copilot、Windsurf 等多种 IDE。
 
-Add this marketplace to Claude Code:
-
-```bash
-/plugin marketplace add jianlanglinhei/vibe-plugins
-```
-
-## Available Plugins
-
-- **一码多端插件 (cross-platform)**: 帮助开发者实现跨平台代码开发和部署的工具集
-- **效率插件 (productivity)**: 提升开发效率的工具集合，包括代码生成、重构、文档生成等
-- **稳定性插件 (stability)**: 提升代码稳定性和可靠性的工具集，包括错误处理、性能监控、测试等
-- **无码类插件 (no-code)**: 低代码/无代码开发工具，通过可视化和自然语言生成代码
-
-## Usage
-
-1. Add the marketplace: `/plugin marketplace add jianlanglinhei/vibe-plugins`
-2. Browse plugins: `/plugin`
-3. Install a plugin: `/plugin install <plugin-name>`
-
-## Creating Your Own Plugin
-
-See the `.claude-plugin/example-plugin/` directory for a template.
-
-### Plugin Structure
-
-```
-.claude-plugin/
-├── marketplace.json          # Marketplace configuration
-└── <plugin-name>/
-    ├── plugin.json           # Plugin configuration
-    ├── README.md             # Plugin documentation
-    ├── commands/             # Slash commands (optional)
-    ├── agents/               # Subagents (optional)
-    ├── mcp-servers/          # MCP servers (optional)
-    └── hooks/                # Hooks (optional)
-```
-
-## Learn More
-
-- [Claude Code Plugins Documentation](https://claude.com/blog/claude-code-plugins)
-- [Model Context Protocol](https://modelcontextprotocol.io/)
-
-## CLI 安装器
-
-使用仓库内置的 CLI 把插件/MCP 注入到项目，支持 Claude Code、Cursor、qoder 三端。
-
-### 快速开始
+## 安装
 
 ```bash
-# 安装依赖
-npm install
+# 使用 tnpm 安装
+tnpm install @ali/vibe-plugins@latest
 
-# 自动检测环境并安装 cross-platform 插件
-node ./packages/cli/bin/vibe-plugins.js install cross-platform
-
-# 指定环境与目标目录
-node ./packages/cli/bin/vibe-plugins.js install cross-platform --env claude --target /path/to/project
+# 或全局安装
+tnpm install -g @ali/vibe-plugins@latest
 ```
 
-### 安装方式
+## 快速开始
 
-#### 方式一：传统文件复制（默认）
-
-直接复制文件到目标项目：
+### 方式一：全局安装后使用（推荐）
 
 ```bash
-node ./packages/cli/bin/vibe-plugins.js install cross-platform --env claude
+# 全局安装
+tnpm install -g @ali/vibe-plugins@latest
+
+# 直接使用命令
+vibe-plugins list                         # 查看所有可用预设
+vibe-plugins install cross-platform       # 安装预设
+vibe-plugins generate cursor              # 生成 Cursor 配置
+vibe-plugins generate                     # 生成所有 IDE 配置
 ```
 
-#### 方式二：使用 Claude Agent SDK（推荐）
-
-利用 [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/typescript) 的能力，让 Claude 自己执行安装：
+### 方式二：npx 临时运行
 
 ```bash
-node ./packages/cli/bin/vibe-plugins.js install cross-platform --env claude --use-sdk
+npx @ali/vibe-plugins install cross-platform
+npx @ali/vibe-plugins generate cursor
 ```
 
-这种方式会：
-- 使用 `@anthropic-ai/claude-agent-sdk` 的 `query()` 函数
-- 让 Claude 读取插件文件并执行安装
-- 利用 Claude Code 的默认工具集进行文件操作
-- 提供更智能的安装过程
+## 可用预设
 
-### 使用已安装的插件
+| 预设名 | 说明 |
+|--------|------|
+| `cross-platform` | 跨端开发配置（MCP、规则、命令、子代理） |
+| `productivity` | 效率工具配置（代码审查、重构等） |
 
-安装完成后，在你的代码中使用 Claude Agent SDK 加载插件：
+查看所有预设：
 
-```javascript
-import { query } from "@anthropic-ai/claude-agent-sdk";
+```bash
+npx @ali/vibe-plugins list
+```
 
-for await (const message of query({
-  prompt: "使用跨端插件检查代码兼容性",
-  options: {
-    plugins: [
-      { type: "local", path: "./.claude-plugin/cross-platform" }
-    ],
-    tools: { type: "preset", preset: "claude_code" }
+## 命令说明
+
+### `install <preset> [target-dir]`
+
+安装预设到目标目录的 `.rulesync/` 文件夹。
+
+```bash
+# 安装到当前目录
+npx @ali/vibe-plugins install cross-platform
+
+# 安装到指定目录
+npx @ali/vibe-plugins install cross-platform ./my-project
+```
+
+安装后会复制以下内容：
+- `rules/` - AI 规则文件
+- `commands/` - 斜杠命令
+- `subagents/` - 子代理配置
+- `mcp.json` - MCP 服务器配置
+
+### `generate [target]`
+
+使用 rulesync 生成 IDE 配置文件。
+
+```bash
+# 生成 Cursor 配置
+npx @ali/vibe-plugins generate cursor
+
+# 生成 Claude Code 配置
+npx @ali/vibe-plugins generate claudecode
+
+# 生成所有支持的 IDE 配置
+npx @ali/vibe-plugins generate
+```
+
+支持的 IDE：
+- `cursor` - Cursor IDE
+- `claudecode` - Claude Code
+- `copilot` - GitHub Copilot
+- `windsurf` - Windsurf
+- `cline` - Cline
+- `roo` - Roo
+
+### `list`
+
+列出所有可用预设。
+
+```bash
+npx @ali/vibe-plugins list
+```
+
+## 预设结构
+
+```
+presets/
+├── cross-platform/
+│   ├── rules/           # AI 规则
+│   │   └── overview.md
+│   ├── commands/        # 斜杠命令
+│   │   └── review-pr.md
+│   ├── subagents/       # 子代理
+│   │   └── planner.md
+│   └── mcp.json         # MCP 配置
+└── productivity/
+    ├── rules/
+    │   └── code-review.md
+    └── commands/
+        └── refactor.md
+```
+
+## 工作流程
+
+```
+1. 安装预设 → .rulesync/ 目录
+   npx @ali/vibe-plugins install cross-platform
+
+2. 生成 IDE 配置
+   npx @ali/vibe-plugins generate cursor
+
+3. 在 IDE 中使用
+   - 规则自动生效
+   - 使用 /命令 触发功能
+```
+
+## 在项目中使用
+
+### 方式一：npx 直接运行
+
+```bash
+npx @ali/vibe-plugins install cross-platform
+npx @ali/vibe-plugins generate cursor
+```
+
+### 方式二：添加到 package.json
+
+```json
+{
+  "scripts": {
+    "setup:ai": "vibe-plugins install cross-platform && vibe-plugins generate cursor"
+  },
+  "devDependencies": {
+    "@ali/vibe-plugins": "^0.1.0"
   }
-})) {
-  // 处理消息...
 }
 ```
 
-参考示例：
-- `packages/cli/examples/use-plugin-with-sdk.js` - 使用已安装的插件
-- `packages/cli/examples/install-and-use.js` - 安装并立即使用
+然后运行：
 
-### CLI 选项
+```bash
+tnpm install
+tnpm run setup:ai
+```
 
-- `--env <claude|cursor|qoder|auto>`：强制指定环境，默认自动探测
-- `--target <path>`：目标项目路径，默认当前目录
-- `--dry-run`：仅打印计划，不写入文件
-- `--use-sdk`：使用 Claude Agent SDK 执行安装（仅 Claude 环境）
+## 依赖
 
-### 环境支持
+- [rulesync](https://www.npmjs.com/package/rulesync) - AI IDE 规则同步工具
 
-CLI 会根据环境更新：
-- **Claude Code**: `.claude-plugin/<plugin>/plugin.json` 与 MCP 目录
-- **Cursor**: `~/.cursor/settings.json`（仅 MCP）
-- **qoder**: `qoder.config.json` 与项目目录结构
+## License
 
-详细文档请参考：[packages/cli/README.md](packages/cli/README.md)
+MIT
