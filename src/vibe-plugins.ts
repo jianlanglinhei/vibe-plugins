@@ -35,8 +35,8 @@ function copyDir(src: string, dest: string): void {
 function install(preset: string, targetDir: string = process.cwd()): void {
   const presetDir = path.join(PRESETS_DIR, preset);
   if (!fs.existsSync(presetDir)) {
-    console.error(`❌ 预设 "${preset}" 不存在`);
-    console.log(`可用预设: ${Object.keys(PRESETS).join(", ")}`);
+    console.error(`❌ 套件 "${preset}" 不存在`);
+    console.log(`可用套件: ${Object.keys(PRESETS).join(", ")}`);
     process.exit(1);
   }
 
@@ -75,7 +75,7 @@ function install(preset: string, targetDir: string = process.cwd()): void {
     console.log(`✅ 已合并 mcp.json`);
   }
 
-  console.log(`\n🎉 预设 "${preset}" 安装完成！`);
+  console.log(`\n🎉 套件 "${preset}" 安装完成！`);
   console.log(`
 📝 下一步：生成 IDE 配置
 
@@ -101,7 +101,7 @@ function generate(target: string = "*"): void {
 }
 
 function list(): void {
-  console.log("📦 可用预设:\n");
+  console.log("📦 可用套件:\n");
   for (const [name, desc] of Object.entries(PRESETS)) {
     console.log(`  ${name.padEnd(20)} ${desc}`);
   }
@@ -112,9 +112,9 @@ function showHelp(): void {
 vp (vibe-plugins) - AI IDE 配置管理工具
 
 用法:
-  vp install <preset> [target-dir]  安装预设到目标目录
+  vp install <preset> [target-dir]  安装套件到目标目录
   vp generate [target]              生成 IDE 配置 (cursor/claudecode/*)
-  vp list                           列出可用预设
+  vp list                           列出可用套件
 
 示例:
   vp install cross-platform         安装跨端开发配置

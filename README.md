@@ -22,8 +22,8 @@ tnpm install -g @ali/vibe-plugins@latest
 tnpm install -g @ali/vibe-plugins@latest
 
 # 直接使用命令
-vp list                         # 查看所有可用预设
-vp install cross-platform       # 安装预设
+vp list                         # 查看所有可用套件
+vp install cross-platform       # 安装套件
 vp generate cursor              # 生成 Cursor 配置
 vp generate                     # 生成所有 IDE 配置
 ```
@@ -37,14 +37,14 @@ npx @ali/vibe-plugins generate cursor
 npx @ali/vibe-plugins list
 ```
 
-## 可用预设
+## 可用套件
 
-| 预设名 | 说明 |
+| 套件名 | 说明 |
 |--------|------|
 | `cross-platform` | 跨端开发配置（MCP、规则、命令、子代理） |
 | `productivity` | 效率工具配置（代码审查、重构等） |
 
-查看所有预设：
+查看所有套件：
 
 ```bash
 vp list
@@ -54,7 +54,7 @@ vp list
 
 ### `install <preset> [target-dir]`
 
-安装预设到目标目录的 `.rulesync/` 文件夹。
+安装套件到目标目录的 `.rulesync/` 文件夹。
 
 ```bash
 # 安装到当前目录
@@ -95,13 +95,13 @@ vp generate
 
 ### `list`
 
-列出所有可用预设。
+列出所有可用套件。
 
 ```bash
 vp list
 ```
 
-## 预设结构
+## 套件结构
 
 ```
 presets/
@@ -123,7 +123,7 @@ presets/
 ## 工作流程
 
 ```
-1. 安装预设 → .rulesync/ 目录
+1. 安装套件 → .rulesync/ 目录
    vp install cross-platform
 
 2. 生成 IDE 配置
