@@ -7,64 +7,64 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const PRESETS_DIR = path.join(ROOT, "presets");
 const PRESETS = {
-    "cross-platform": "跨端开发配置（MCP、规则、命令）",
-    "productivity": "效率工具配置",
+  "cross-platform": "跨端开发配置（MCP、规则、命令）",
+  "productivity": "效率工具配置",
 };
 function copyDir(src, dest) {
-    if (!fs.existsSync(src))
-        return;
-    fs.mkdirSync(dest, { recursive: true });
-    for (const file of fs.readdirSync(src)) {
-        const srcPath = path.join(src, file);
-        const destPath = path.join(dest, file);
-        if (fs.statSync(srcPath).isDirectory()) {
-            copyDir(srcPath, destPath);
-        }
-        else {
-            fs.copyFileSync(srcPath, destPath);
-        }
+  if (!fs.existsSync(src))
+    return;
+  fs.mkdirSync(dest, { recursive: true });
+  for (const file of fs.readdirSync(src)) {
+    const srcPath = path.join(src, file);
+    const destPath = path.join(dest, file);
+    if (fs.statSync(srcPath).isDirectory()) {
+      copyDir(srcPath, destPath);
     }
+    else {
+      fs.copyFileSync(srcPath, destPath);
+    }
+  }
 }
 function install(preset, targetDir = process.cwd()) {
-    const presetDir = path.join(PRESETS_DIR, preset);
-    if (!fs.existsSync(presetDir)) {
-        console.error(`❌ 套件 "${preset}" 不存在`);
-        console.log(`可用套件: ${Object.keys(PRESETS).join(", ")}`);
-        process.exit(1);
+  const presetDir = path.join(PRESETS_DIR, preset);
+  if (!fs.existsSync(presetDir)) {
+    console.error(`❌ 套件 "${preset}" 不存在`);
+    console.log(`可用套件: ${Object.keys(PRESETS).join(", ")}`);
+    process.exit(1);
+  }
+  const rulesyncDir = path.join(targetDir, ".rulesync");
+  fs.mkdirSync(rulesyncDir, { recursive: true });
+  // 复制各个子目录
+  for (const subdir of ["rules", "commands", "subagents", "skills"]) {
+    const src = path.join(presetDir, subdir);
+    const dest = path.join(rulesyncDir, subdir);
+    if (fs.existsSync(src)) {
+      copyDir(src, dest);
+      console.log(`✅ 已复制 ${subdir}/`);
     }
-    const rulesyncDir = path.join(targetDir, ".rulesync");
-    fs.mkdirSync(rulesyncDir, { recursive: true });
-    // 复制各个子目录
-    for (const subdir of ["rules", "commands", "subagents", "skills"]) {
-        const src = path.join(presetDir, subdir);
-        const dest = path.join(rulesyncDir, subdir);
-        if (fs.existsSync(src)) {
-            copyDir(src, dest);
-            console.log(`✅ 已复制 ${subdir}/`);
-        }
+  }
+  // 复制 .aiignore
+  const aiignoreSrc = path.join(presetDir, ".aiignore");
+  const aiignoreDest = path.join(rulesyncDir, ".aiignore");
+  if (fs.existsSync(aiignoreSrc)) {
+    fs.copyFileSync(aiignoreSrc, aiignoreDest);
+    console.log(`✅ 已复制 .aiignore`);
+  }
+  // 合并 mcp.json
+  const mcpSrc = path.join(presetDir, "mcp.json");
+  const mcpDest = path.join(rulesyncDir, "mcp.json");
+  if (fs.existsSync(mcpSrc)) {
+    let mcpConfig = { mcpServers: {} };
+    if (fs.existsSync(mcpDest)) {
+      mcpConfig = JSON.parse(fs.readFileSync(mcpDest, "utf-8"));
     }
-    // 复制 .aiignore
-    const aiignoreSrc = path.join(presetDir, ".aiignore");
-    const aiignoreDest = path.join(rulesyncDir, ".aiignore");
-    if (fs.existsSync(aiignoreSrc)) {
-        fs.copyFileSync(aiignoreSrc, aiignoreDest);
-        console.log(`✅ 已复制 .aiignore`);
-    }
-    // 合并 mcp.json
-    const mcpSrc = path.join(presetDir, "mcp.json");
-    const mcpDest = path.join(rulesyncDir, "mcp.json");
-    if (fs.existsSync(mcpSrc)) {
-        let mcpConfig = { mcpServers: {} };
-        if (fs.existsSync(mcpDest)) {
-            mcpConfig = JSON.parse(fs.readFileSync(mcpDest, "utf-8"));
-        }
-        const newMcp = JSON.parse(fs.readFileSync(mcpSrc, "utf-8"));
-        mcpConfig.mcpServers = { ...mcpConfig.mcpServers, ...newMcp.mcpServers };
-        fs.writeFileSync(mcpDest, JSON.stringify(mcpConfig, null, 2));
-        console.log(`✅ 已合并 mcp.json`);
-    }
-    console.log(`\n🎉 套件 "${preset}" 安装完成！`);
-    console.log(`
+    const newMcp = JSON.parse(fs.readFileSync(mcpSrc, "utf-8"));
+    mcpConfig.mcpServers = { ...mcpConfig.mcpServers, ...newMcp.mcpServers };
+    fs.writeFileSync(mcpDest, JSON.stringify(mcpConfig, null, 2));
+    console.log(`✅ 已合并 mcp.json`);
+  }
+  console.log(`\n🎉 套件 "${preset}" 安装完成！`);
+  console.log(`
 📝 下一步：生成 IDE 配置
 
   vp generate cursor      # 生成 Cursor 配置
@@ -75,26 +75,26 @@ function install(preset, targetDir = process.cwd()) {
 `);
 }
 function generate(target = "*") {
-    console.log(`🔄 生成 ${target} 配置...`);
-    try {
-        execSync(`npx rulesync generate --targets ${target} --features '*'`, {
-            stdio: "inherit",
-            cwd: process.cwd(),
-        });
-    }
-    catch {
-        console.error("❌ 生成失败，请确保已安装 rulesync");
-        process.exit(1);
-    }
+  console.log(`🔄 生成 ${target} 配置...`);
+  try {
+    execSync(`npx rulesync generate --targets ${target} --features '*'`, {
+      stdio: "inherit",
+      cwd: process.cwd(),
+    });
+  }
+  catch {
+    console.error("❌ 生成失败，请确保已安装 rulesync");
+    process.exit(1);
+  }
 }
 function list() {
-    console.log("📦 可用套件:\n");
-    for (const [name, desc] of Object.entries(PRESETS)) {
-        console.log(`  ${name.padEnd(20)} ${desc}`);
-    }
+  console.log("📦 可用套件:\n");
+  for (const [name, desc] of Object.entries(PRESETS)) {
+    console.log(`  ${name.padEnd(20)} ${desc}`);
+  }
 }
 function showHelp() {
-    console.log(`
+  console.log(`
 vp (vibe-plugins) - AI IDE 配置管理工具
 
 用法:
@@ -111,20 +111,20 @@ vp (vibe-plugins) - AI IDE 配置管理工具
 // CLI 入口
 const [, , cmd, ...args] = process.argv;
 switch (cmd) {
-    case "install":
-        if (!args[0]) {
-            console.error("用法: vibe-plugins install <preset> [target-dir]");
-            list();
-            process.exit(1);
-        }
-        install(args[0], args[1] || process.cwd());
-        break;
-    case "generate":
-        generate(args[0] || "*");
-        break;
-    case "list":
-        list();
-        break;
-    default:
-        showHelp();
+  case "install":
+    if (!args[0]) {
+      console.error("用法: vibe-plugins install <preset> [target-dir]");
+      list();
+      process.exit(1);
+    }
+    install(args[0], args[1] || process.cwd());
+    break;
+  case "generate":
+    generate(args[0] || "*");
+    break;
+  case "list":
+    list();
+    break;
+  default:
+    showHelp();
 }

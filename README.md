@@ -1,7 +1,7 @@
 # Vibe Plugins
 
 
-一键安装 AI CODING的rules、command、MCP 等配置，支持 Cursor、Claude Code、Copilot、Windsurf 等多种 IDE。
+为 Cursor、Claude Code、Copilot、Windsurf 等 AI IDE 快速安装 Rules、Commands、MCP 等配置套件。
 
 ## 安装
 
