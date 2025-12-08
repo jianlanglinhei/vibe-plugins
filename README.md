@@ -1,8 +1,7 @@
 # Vibe Plugins
 
-> AI IDE 配置管理工具 - 基于 rulesync 的预设分发
 
-一键安装 AI 编程助手的规则、命令、MCP 配置，支持 Cursor、Claude Code、Copilot、Windsurf 等多种 IDE。
+一键安装 AI CODING的rules、command、MCP 等配置，支持 Cursor、Claude Code、Copilot、Windsurf 等多种 IDE。
 
 ## 安装
 
