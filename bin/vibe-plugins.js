@@ -67,9 +67,9 @@ function install(preset, targetDir = process.cwd()) {
     console.log(`
 📝 下一步：生成 IDE 配置
 
-  npx rulesync generate --targets cursor --features '*'      # 生成 Cursor 配置
-  npx rulesync generate --targets claudecode --features '*'  # 生成 Claude Code 配置
-  npx rulesync generate --targets '*' --features '*'         # 生成所有 IDE 配置
+  vp generate cursor      # 生成 Cursor 配置
+  vp generate claudecode  # 生成 Claude Code 配置
+  vp generate             # 生成所有 IDE 配置
 
 支持的 IDE: cursor, claudecode, copilot, windsurf, cline, roo
 `);
@@ -95,17 +95,17 @@ function list() {
 }
 function showHelp() {
     console.log(`
-vibe-plugins - AI IDE 配置管理工具
+vp (vibe-plugins) - AI IDE 配置管理工具
 
 用法:
-  vibe-plugins install <preset> [target-dir]  安装预设到目标目录
-  vibe-plugins generate [target]              生成 IDE 配置 (cursor/claudecode/*)
-  vibe-plugins list                           列出可用预设
+  vp install <preset> [target-dir]  安装预设到目标目录
+  vp generate [target]              生成 IDE 配置 (cursor/claudecode/*)
+  vp list                           列出可用预设
 
 示例:
-  npx vibe-plugins install cross-platform     安装跨端开发配置
-  npx vibe-plugins generate cursor            生成 Cursor 配置
-  npx vibe-plugins generate                   生成所有 IDE 配置
+  vp install cross-platform         安装跨端开发配置
+  vp generate cursor                生成 Cursor 配置
+  vp generate                       生成所有 IDE 配置
 `);
 }
 // CLI 入口

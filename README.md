@@ -23,17 +23,19 @@ tnpm install -g @ali/vibe-plugins@latest
 tnpm install -g @ali/vibe-plugins@latest
 
 # 直接使用命令
-vibe-plugins list                         # 查看所有可用预设
-vibe-plugins install cross-platform       # 安装预设
-vibe-plugins generate cursor              # 生成 Cursor 配置
-vibe-plugins generate                     # 生成所有 IDE 配置
+vp list                         # 查看所有可用预设
+vp install cross-platform       # 安装预设
+vp generate cursor              # 生成 Cursor 配置
+vp generate                     # 生成所有 IDE 配置
 ```
 
-### 方式二：npx 临时运行
+### 方式二：npx 临时运行（无需安装）
 
 ```bash
 npx @ali/vibe-plugins install cross-platform
 npx @ali/vibe-plugins generate cursor
+# 或使用简写
+npx @ali/vibe-plugins list
 ```
 
 ## 可用预设
@@ -46,7 +48,7 @@ npx @ali/vibe-plugins generate cursor
 查看所有预设：
 
 ```bash
-npx @ali/vibe-plugins list
+vp list
 ```
 
 ## 命令说明
@@ -57,10 +59,10 @@ npx @ali/vibe-plugins list
 
 ```bash
 # 安装到当前目录
-npx @ali/vibe-plugins install cross-platform
+vp install cross-platform
 
 # 安装到指定目录
-npx @ali/vibe-plugins install cross-platform ./my-project
+vp install cross-platform ./my-project
 ```
 
 安装后会复制以下内容：
@@ -75,13 +77,13 @@ npx @ali/vibe-plugins install cross-platform ./my-project
 
 ```bash
 # 生成 Cursor 配置
-npx @ali/vibe-plugins generate cursor
+vp generate cursor
 
 # 生成 Claude Code 配置
-npx @ali/vibe-plugins generate claudecode
+vp generate claudecode
 
 # 生成所有支持的 IDE 配置
-npx @ali/vibe-plugins generate
+vp generate
 ```
 
 支持的 IDE：
@@ -97,7 +99,7 @@ npx @ali/vibe-plugins generate
 列出所有可用预设。
 
 ```bash
-npx @ali/vibe-plugins list
+vp list
 ```
 
 ## 预设结构
@@ -123,10 +125,10 @@ presets/
 
 ```
 1. 安装预设 → .rulesync/ 目录
-   npx @ali/vibe-plugins install cross-platform
+   vp install cross-platform
 
 2. 生成 IDE 配置
-   npx @ali/vibe-plugins generate cursor
+   vp generate cursor
 
 3. 在 IDE 中使用
    - 规则自动生效
@@ -135,11 +137,11 @@ presets/
 
 ## 在项目中使用
 
-### 方式一：npx 直接运行
+### 方式一：全局命令
 
 ```bash
-npx @ali/vibe-plugins install cross-platform
-npx @ali/vibe-plugins generate cursor
+vp install cross-platform
+vp generate cursor
 ```
 
 ### 方式二：添加到 package.json
@@ -147,7 +149,7 @@ npx @ali/vibe-plugins generate cursor
 ```json
 {
   "scripts": {
-    "setup:ai": "vibe-plugins install cross-platform && vibe-plugins generate cursor"
+    "setup:ai": "vp install cross-platform && vp generate cursor"
   },
   "devDependencies": {
     "@ali/vibe-plugins": "^0.1.0"
